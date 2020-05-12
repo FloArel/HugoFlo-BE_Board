@@ -3,6 +3,20 @@
 
 using namespace std;
 
+int luminosite_environnement=200;
+
+
+//classe sensor lumino
+AnalogSensorLuminosity::AnalogSensorLuminosity(int d,int l):Device(),lumin(luminosite_environnement){
+
+}
+
+void AnalogSensorLuminosity::run(){
+  while(1){
+
+  }
+}
+
 //classe AnalogSensorTemperature
 AnalogSensorTemperature::AnalogSensorTemperature(int d,int  t):Device(),val(t),temps(d){
   alea=1;
