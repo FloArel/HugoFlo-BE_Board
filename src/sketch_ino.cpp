@@ -8,6 +8,7 @@ void Board::setup(){
 // on fixe les pin en entree et en sorite en fonction des capteurs/actionneurs mis sur la carte
   pinMode(1,INPUT);
   pinMode(0,OUTPUT);
+  pinMode(2,INPUT);
 }
 
 // la boucle de controle arduino
