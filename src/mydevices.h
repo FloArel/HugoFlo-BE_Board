@@ -6,6 +6,8 @@
 #include <unistd.h>
 #include <string.h>
 #include "core_simulation.h"
+#include <fstream>
+
 
 
 
@@ -69,7 +71,7 @@ public:
 };
 
 class IntelligentDigitalActuatorLED: public Device{
- private:
+  private:
   // etat de la LED
   int state;
   // temps entre 2 affichage de l etat de la led
@@ -82,5 +84,17 @@ public:
   virtual void run();
 }; 
 
+
+//classe bouton
+class ExternalDigitalSensorButton: public Device{
+  private:
+    int state;
+    int temps;
+  public:
+    ExternalDigitalSensorButton(int t);
+
+    virtual void run();
+
+};
 
 #endif

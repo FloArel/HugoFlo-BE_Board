@@ -3,7 +3,7 @@
 
 using namespace std;
 
-int luminosite_environnement=200;
+static int luminosite_environnement=200;
 
 
 //classe sensor lumino
@@ -88,4 +88,28 @@ void IntelligentDigitalActuatorLED::run(){
 }
 
 
+ExternalDigitalSensorButton::ExternalDigitalSensorButton(int t):Device(),state(LOW),temps(t){
+
+}
+
+void ExternalDigitalSensorButton::run(){
+  while (1)
+  {
+    if(ptrmem!=NULL){
+      
+
+      if(ifstream("on.txt")){
+        state=HIGH;
+      }
+      else
+      {
+        state=LOW;
+      }
+
+      *ptrmem=state;
+    }
+  }
+  
+
+}
 
