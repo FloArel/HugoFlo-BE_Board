@@ -14,20 +14,26 @@ void Board::setup(){
 // la boucle de controle arduino
 void Board::loop(){
   char buf[100];
+  char buf2[100];
   int val;
+  int valum;
   static int cpt=0;
   static int bascule=0;
   int i=0;
   for(i=0;i<10;i++){
     // lecture sur la pin 1 : capteur de temperature
     val=analogRead(1);
+    valum=analogRead(2);
     sprintf(buf,"temperature %d",val);
     Serial.println(buf);
-    if(cpt%5==0){
+    sprintf(buf2,"luminosite %d",valum);
+    Serial.println(buf2);
+
+    /*if(cpt%5==0){
         // tous les 5 fois on affiche sur l ecran la temperature
       sprintf(buf,"%d",val);
       bus.write(1,buf,100);
-    }
+    }*/
     cpt++;
     sleep(1);
   }

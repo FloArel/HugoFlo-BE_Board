@@ -7,13 +7,16 @@ int luminosite_environnement=200;
 
 
 //classe sensor lumino
-AnalogSensorLuminosity::AnalogSensorLuminosity(int d,int l):Device(),lumin(luminosite_environnement){
-
+AnalogSensorLuminosity::AnalogSensorLuminosity(int d):Device(),temps(d){
+  
 }
 
 void AnalogSensorLuminosity::run(){
   while(1){
-
+    lumin=luminosite_environnement;
+    if(ptrmem!=NULL)
+      *ptrmem=lumin;
+    sleep(temps);
   }
 }
 

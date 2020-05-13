@@ -32,8 +32,10 @@ class AnalogSensorLuminosity: public Device {
   private:
     // valeur luminosité
     int lumin;
+    int temps;
+    
   public:
-    AnalogSensorLuminosity(int l);
+    AnalogSensorLuminosity(int d);
 
     virtual void run();
 };
