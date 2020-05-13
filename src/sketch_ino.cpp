@@ -39,12 +39,16 @@ void Board::loop(){
     sleep(1);
   }
 // on eteint et on allume la LED
-  if(bascule)
+  if(bascule){
     digitalWrite(0,HIGH);
-    digitalWrite(3,HIGH)
-  else
+    digitalWrite(3,HIGH);
+    cout<<"bascule vers on \n";
+  }
+  else{
     digitalWrite(0,LOW);
     digitalWrite(3,LOW);
+    cout<<"bascule vers off \n";
+  }
   bascule=1-bascule;
   
 }

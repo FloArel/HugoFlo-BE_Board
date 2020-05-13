@@ -43,9 +43,9 @@ void DigitalActuatorLED::run(){
     if(ptrmem!=NULL)
       state=*ptrmem;
     if (state==LOW)
-      cout << "((((eteint))))\n";
+      cout << "((((eteint1))))\n";
     else
-    cout << "((((allume))))\n";
+      cout << "((((allume1))))\n";
     sleep(temps);
     }
 }
@@ -64,7 +64,28 @@ void I2CActuatorScreen::run(){
     }
 }
 
+//led intelligente
+IntelligentDigitalActuatorLED::IntelligentDigitalActuatorLED(int t):Device(),state(LOW),temps(t){
+}
 
+void IntelligentDigitalActuatorLED::run(){
+  int lumin_base=luminosite_environnement;
+  while(1){
+
+    if(ptrmem!=NULL)
+      state=*ptrmem;
+
+    if (state==LOW){
+      cout << "((((eteint2))))\n";
+      luminosite_environnement=lumin_base;
+    }
+    else{
+      cout << "((((allume2))))\n";
+      luminosite_environnement=lumin_base+50;
+    }
+    sleep(temps);
+    }
+}
 
 
 
