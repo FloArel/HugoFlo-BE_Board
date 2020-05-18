@@ -3,51 +3,69 @@
 
 using namespace std;
 
-static int luminosite_environnement=200;
 
 
-//classe sensor lumino
-AnalogSensorLuminosity::AnalogSensorLuminosity(int d):Device(),temps(d){
+Pressoir::Pressoir(int d): Button(),state(LOW),temps(d){
+}
+
+
+void Pressoir::run(){
+ while (1)
+  {
+    if(ptrmem!=NULL){
+      
+
+      if(ifstream("on.txt")){
+        state=HIGH;
+      }
+      else
+      {
+        state=LOW;
+      }
+
+      *ptrmem=state;
+    }
+  }
   
 }
 
-void AnalogSensorLuminosity::run(){
-  while(1){
-    lumin=luminosite_environnement;
-    if(ptrmem!=NULL)
-      *ptrmem=lumin;
-    sleep(temps);
-  }
-}
 
-//classe AnalogSensorTemperature
-AnalogSensorTemperature::AnalogSensorTemperature(int d,int  t):Device(),val(t),temps(d){
-  alea=1;
+  
 }
-
-void AnalogSensorTemperature::run(){
-  while(1){
-    alea=1-alea;
-    if(ptrmem!=NULL)
-      *ptrmem=val+alea;
-    sleep(temps);
-  }
-}
-
 //classe DigitalActuatorLED
-DigitalActuatorLED::DigitalActuatorLED(int t):Device(),state(LOW),temps(t){
+Direction::Direction(int t):Button(),state(),temps(t){
+}
+void Direction::run(){
+  while(1){
+    if(ptr_mem!=NULL){
+      switch case:
+        
+    }
+ 
+  }
 }
 
-void DigitalActuatorLED::run(){
-  while(1){
-    if(ptrmem!=NULL)
-      state=*ptrmem;
-    if (state==LOW)
-      cout << "((((eteint1))))\n";
-    else
-      cout << "((((allume1))))\n";
-    sleep(temps);
+
+Tilt::Tilt(int d,int  t):Button(),val(t),temps(d){}
+
+void Tilt::run(){
+ while (1)
+  {
+    if(ptrmem!=NULL){
+      
+
+      if(ifstream("on.txt")){
+        state=HIGH;
+      }
+      else
+      {
+        state=LOW;
+      }
+
+      *ptrmem=state;
     }
+  }
+  
 }
 
 // classe I2CActuatorScreen
@@ -87,29 +105,4 @@ void IntelligentDigitalActuatorLED::run(){
     }
 }
 
-
-ExternalDigitalSensorButton::ExternalDigitalSensorButton(int t):Device(),state(LOW),temps(t){
-
-}
-
-void ExternalDigitalSensorButton::run(){
-  while (1)
-  {
-    if(ptrmem!=NULL){
-      
-
-      if(ifstream("on.txt")){
-        state=HIGH;
-      }
-      else
-      {
-        state=LOW;
-      }
-
-      *ptrmem=state;
-    }
-  }
-  
-
-}
 

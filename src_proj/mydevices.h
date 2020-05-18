@@ -13,7 +13,7 @@
 
 
 // exemple de capteur analogique de temperature, ne pas oublier d'heriter de Device
-class AnalogSensorTemperature: public Device {
+class Button: public Device {
 private:
   // fait osciller la valeur du cpateur de 1
   int alea;
@@ -23,39 +23,59 @@ private:
   int temps;
   
 public:
-  //constructeur ne pas oublier d'initialiser la classe mere
-  AnalogSensorTemperature(int d,int  t);
   // thread representant le capteur et permettant de fonctionner independamment de la board
-  virtual void run();
+    virtual void run()=0;
+    //constructeur
+  Button(){};
 };
 
 
-class AnalogSensorLuminosity: public Device {
-  private:
-    // valeur luminosité
-    int lumin;
-    int temps;
-    
-  public:
-    AnalogSensorLuminosity(int d);
 
+
+// Création des trois classes de boutons différentes qui héritent de Button
+
+//classe bouton
+class Pressoir: public Button{
+  private:
+    int state;
+    int temps;
+  public:
     virtual void run();
 };
 
-// exemple d'actionneur digital : une led, ne pas oublier d'heriter de Device
-class DigitalActuatorLED: public Device {
-private:
-  // etat de la LED
-  int state;
-  // temps entre 2 affichage de l etat de la led
-  int temps;
-  
-public:
-    // initialisation du temps de rafraichiisement
-  DigitalActuatorLED(int t);
-  // thread representant l'actionneur et permettant de fonctionner independamment de la board
-  virtual void run();
+class Tilt: public Button{
+  private:
+    int state;
+    int temps;
+  public:
+    virtual void run();
 };
+
+class Direction: public Button{
+  private:
+    int state;
+    int temps;
+  public:
+    virtual void run();
+};
+
+class Dice{
+  private:
+    int value;
+  public:
+    int read_value();
+    int throw_dice();
+};
+
+class LCD{
+  //on voit si on peut utiliser la classe LCD qui existe
+}
+
+
+
+
+
+
 
 // exemple d'actionneur sur le bus I2C permettant d'echanger des tableaux de caracteres : un ecran, ne pas oublier d'heriter de Device
 class I2CActuatorScreen : public Device{
@@ -70,30 +90,6 @@ public:
   virtual void run();
 };
 
-class IntelligentDigitalActuatorLED: public Device{
-  private:
-  // etat de la LED
-  int state;
-  // temps entre 2 affichage de l etat de la led
-  int temps;
-  
-public:
-    // initialisation du temps de rafraichiisement
-  IntelligentDigitalActuatorLED(int t);
-  // thread representant l'actionneur et permettant de fonctionner independamment de la board
-  virtual void run();
-}; 
-
-
-//classe bouton
-class ExternalDigitalSensorButton: public Device{
-  private:
-    int state;
-    int temps;
-  public:
-    ExternalDigitalSensorButton(int t);
-
-    virtual void run();
 
 };
 
