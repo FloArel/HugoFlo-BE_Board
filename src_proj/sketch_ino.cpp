@@ -1,20 +1,25 @@
 #include <unistd.h>
 #include "core_simulation.h"
 
+
 // la fonction d'initialisation d'arduino
 void Board::setup(){
   // on configure la vitesse de la liaison
   Serial.begin(9600);
 // on fixe les pin en entree et en sorite en fonction des capteurs/actionneurs mis sur la carte
   pinMode(1,INPUT);
-  pinMode(0,OUTPUT);
+  pinMode(0,INPUT);
   pinMode(2,INPUT);
-  pinMode(3,OUTPUT);
-  pinMode(4,INPUT);
+
 }
 
 // la boucle de controle arduino
 void Board::loop(){
+
+
+
+
+
   char buf[100];
   char buf2[100];
   int val;
@@ -22,6 +27,7 @@ void Board::loop(){
   static int cpt=0;
   static int bascule=0;
   int i=0;
+  
   for(i=0;i<10;i++){
     // lecture sur la pin 1 : capteur de temperature
     val=analogRead(1);
@@ -54,6 +60,6 @@ void Board::loop(){
   }
   //bascule=1-bascule;
   
-}
+};
 
 
