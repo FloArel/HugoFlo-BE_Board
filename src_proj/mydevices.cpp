@@ -5,7 +5,7 @@ using namespace std;
 
 
 
-Pressoir::Pressoir(int d): Button(),state(LOW),temps(d){
+Pressoir::Pressoir(int d): state(LOW),temps(d){
 }
 
 
@@ -26,27 +26,38 @@ void Pressoir::run(){
       *ptrmem=state;
     }
   }
-  
-}
+  cout<<state;
+};
 
-
-  
-}
 //classe DigitalActuatorLED
-Direction::Direction(int t):Button(),state(),temps(t){
-}
+Direction::Direction(int t):state(),temps(t){
+};
 void Direction::run(){
   while(1){
-    if(ptr_mem!=NULL){
-      switch case:
-        
+    if(ptrmem!=NULL){
+      if(ifstream("up.txt")){
+        state=UP;
+      }
+      else if (ifstream("down.txt")){
+        state=DOWN;
+      }
+      else if (ifstream("left.txt")){
+        state=LEFT;
+      }
+      else if (ifstream("right.txt")){
+        state=RIGHT;
+      }  
+      else {
+        state=NOTHING;
+      }
+      *ptrmem=state;
     }
- 
   }
-}
+  cout<<state;
+};
 
 
-Tilt::Tilt(int d,int  t):Button(),val(t),temps(d){}
+Tilt::Tilt(int d):state(LOW),temps(d){}
 
 void Tilt::run(){
  while (1)
@@ -54,7 +65,7 @@ void Tilt::run(){
     if(ptrmem!=NULL){
       
 
-      if(ifstream("on.txt")){
+      if(ifstream("agiter.txt")){
         state=HIGH;
       }
       else
@@ -65,44 +76,19 @@ void Tilt::run(){
       *ptrmem=state;
     }
   }
-  
-}
+  cout<<state;
+};
 
-// classe I2CActuatorScreen
-I2CActuatorScreen::I2CActuatorScreen ():Device(){
-  }
-
-void I2CActuatorScreen::run(){
+void test_classe_mydevices(){
+  Direction Bout_D(DELAY);
+  Pressoir Bout_P(DELAY);
+  Tilt Bout_T(DELAY);
+  cout<<"boutons créés"<<endl;
   while(1){
-    if ( (i2cbus!=NULL)&&!(i2cbus->isEmptyRegister(i2caddr))){
-      Device::i2cbus->requestFrom(i2caddr, buf, I2C_BUFFER_SIZE);
-      cout << "---screen :"<< buf << endl;
-    }
-    sleep(1);
-    }
-}
-
-//led intelligente
-IntelligentDigitalActuatorLED::IntelligentDigitalActuatorLED(int t):Device(),state(LOW),temps(t){
-}
-
-void IntelligentDigitalActuatorLED::run(){
-  int lumin_base=luminosite_environnement;
-  while(1){
-
-    if(ptrmem!=NULL)
-      state=*ptrmem;
-
-    if (state==LOW){
-      cout << "((((eteint2))))\n";
-      luminosite_environnement=lumin_base;
-    }
-    else{
-      cout << "((((allume2))))\n";
-      luminosite_environnement=lumin_base+50;
-    }
-    sleep(temps);
-    }
-}
+    Bout_D.run();
+    Bout_P.run();
+    Bout_T.run();
+  };
+};
 
 

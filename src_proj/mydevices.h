@@ -8,8 +8,11 @@
 #include "core_simulation.h"
 #include <fstream>
 
-
-
+#define NOTHING 0
+#define UP 1
+#define DOWN 2
+#define LEFT 3 
+#define RIGHT 4
 
 
 // exemple de capteur analogique de temperature, ne pas oublier d'heriter de Device
@@ -40,7 +43,10 @@ class Pressoir: public Button{
     int state;
     int temps;
   public:
-    virtual void run();
+    //constructeur
+    Pressoir(int d);
+
+    void run();
 };
 
 class Tilt: public Button{
@@ -48,7 +54,9 @@ class Tilt: public Button{
     int state;
     int temps;
   public:
-    virtual void run();
+  //constructeur
+  Tilt(int d);
+  void run();
 };
 
 class Direction: public Button{
@@ -56,24 +64,19 @@ class Direction: public Button{
     int state;
     int temps;
   public:
-    virtual void run();
+  //constructeur
+  Direction(int t);
+  void run();
 };
 
-class Dice{
-  private:
-    int value;
-  public:
-    int read_value();
-    int throw_dice();
-};
 
 class LCD{
   //on voit si on peut utiliser la classe LCD qui existe
-}
+};
 
 
 
-
+void test_classe_mydevices();
 
 
 
@@ -88,9 +91,6 @@ public:
   I2CActuatorScreen ();
   // thread representant le capteur et permettant de fonctionner independamment de la board
   virtual void run();
-};
-
-
 };
 
 #endif
