@@ -2,6 +2,7 @@
 #include "core_simulation.h"
 #include "internal.h"
 #include <fstream>
+#include "jeu.h"
 
 Dice De1;
 Dice De2;
@@ -30,8 +31,7 @@ if(ifstream("agiter.txt")){
 De1.throw_dice();
 sleep(1);
 De2.throw_dice(); 
-cout<<"Le dé 1 fait "<<De1.read_val()<<endl;
-cout<<"le dé 2 fait "<<De2.read_val()<<endl;
+Afficher_valeur_role(De1.read_val(),De2.read_val());
 sleep(5);
 }
 
