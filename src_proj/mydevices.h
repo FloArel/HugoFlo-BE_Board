@@ -7,6 +7,7 @@
 #include <string.h>
 #include "core_simulation.h"
 #include <fstream>
+//#include "internal.h"
 
 #define NOTHING 0
 #define UP 1
@@ -75,8 +76,6 @@ class LCD{
 };
 
 
-
-void test_classe_mydevices();
 
 
 
