@@ -71,10 +71,11 @@ class Roles{
         
     public:
         
-        Roles();
+        Roles(Player& J0);
+
         Player* getPlayer(int role);
 
-        void setPlayerRole(Player* attrib, int role);
+        void setPlayerRole(Player& attrib, int role);
         
 
 };

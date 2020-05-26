@@ -4,6 +4,7 @@
 
 using namespace std;
 
+#define TEST 0
 #define TESTDE 0
 #define TESTPLAY 1
 #define TESTLISTE 1
@@ -43,13 +44,13 @@ void Dice::throw_dice(){
 //constructeur player
 Player::Player(){
     name="joueur sans nom";
-    nb_joueurs++;
+    //nb_joueurs++;
     
     
 }
 Player::Player(string nom){
     name=nom;
-    nb_joueurs++;
+    //nb_joueurs++;
 }
 
 //destructeur player
@@ -68,8 +69,19 @@ string Player::get_name(){
 
 //constructeur roles
 //constructeur: Tous les rôles sont attribués à un faux joueur
-Roles::Roles(){
+Roles::Roles(Player& J0){
     
+    None=&J0;
+    Dieu=&J0;
+    Heros=&J0;
+    Oracle=&J0;
+    Ecuyer=&J0;
+    Prisonnier=&J0;
+    Catin=&J0;
+    Aubergiste=&J0;
+    Princesse=&J0;
+    Dragon=&J0;
+
 }
 
 Player* Roles::getPlayer(int role){
@@ -109,34 +121,34 @@ Player* Roles::getPlayer(int role){
         }
 }
 
-void Roles::setPlayerRole(Player* attrib, int role){
+void Roles::setPlayerRole(Player& attrib, int role){
     switch (role){
         case DIEU:
-            Dieu=attrib;
+            Dieu=&attrib;
             break;
         case HEROS:
-            Heros=attrib;
+            Heros=&attrib;
             break;
         case ORACLE:
-            Oracle=attrib;
+            Oracle=&attrib;
             break;
         case ECUYER:
-            Ecuyer=attrib;
+            Ecuyer=&attrib;
             break;
         case PRISONNIER:
-            Prisonnier=attrib;
+            Prisonnier=&attrib;
             break;
         case CATIN:
-            Catin=attrib;
+            Catin=&attrib;
             break;
         case AUBERGISTE:
-            Aubergiste=attrib;
+            Aubergiste=&attrib;
             break;
         case PRINCESSE:
-            Princesse=attrib;
+            Princesse=&attrib;
             break;
         case DRAGON:
-            Dragon=attrib;
+            Dragon=&attrib;
             break;
         }
 }
@@ -153,7 +165,7 @@ Player& Player::operator+= (const string & nom){
 }
 
 //TODO: classe rôles avec un attribut pour chaque qui prend un player?
-
+#if TEST
 int main(){
     
     #if TESTDE
@@ -201,3 +213,4 @@ int main(){
 
 
 }
+#endif
