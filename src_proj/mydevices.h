@@ -76,8 +76,6 @@ class LCD{
 
 
 
-void test_classe_mydevices();
-
 
 
 // exemple d'actionneur sur le bus I2C permettant d'echanger des tableaux de caracteres : un ecran, ne pas oublier d'heriter de Device

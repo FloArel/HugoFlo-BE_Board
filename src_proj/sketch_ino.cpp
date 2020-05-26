@@ -16,11 +16,12 @@ void Board::setup(){
 // la boucle de controle arduino
 void Board::loop(){
 
+digitalRead(0);
+digitalRead(1);
+digitalRead(2);
+};
 
-
-
-
-  char buf[100];
+ /* char buf[100];
   char buf2[100];
   int val;
   int valum;
@@ -59,7 +60,7 @@ void Board::loop(){
     cout<<"bascule vers off \n";
   }
   //bascule=1-bascule;
-  
-};
+  */
+
 
 

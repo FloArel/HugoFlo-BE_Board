@@ -17,6 +17,7 @@ void Pressoir::run(){
 
       if(ifstream("on.txt")){
         state=HIGH;
+        cout<<"pressoir état haut"<<endl;
       }
       else
       {
@@ -27,6 +28,7 @@ void Pressoir::run(){
     }
   }
   cout<<state;
+  sleep(5);
 };
 
 //classe DigitalActuatorLED
@@ -37,15 +39,22 @@ void Direction::run(){
     if(ptrmem!=NULL){
       if(ifstream("up.txt")){
         state=UP;
+        cout<<"direction up"<<endl;
       }
       else if (ifstream("down.txt")){
         state=DOWN;
+        cout<<"direction down"<<endl;
+
       }
       else if (ifstream("left.txt")){
         state=LEFT;
+       cout<<"direction left"<<endl;
+
       }
       else if (ifstream("right.txt")){
         state=RIGHT;
+       cout<<"direction right"<<endl;
+
       }  
       else {
         state=NOTHING;
@@ -54,6 +63,7 @@ void Direction::run(){
     }
   }
   cout<<state;
+  sleep(5);
 };
 
 
@@ -67,6 +77,7 @@ void Tilt::run(){
 
       if(ifstream("agiter.txt")){
         state=HIGH;
+        cout<<"tilt agité"<<endl;
       }
       else
       {
@@ -77,9 +88,26 @@ void Tilt::run(){
     }
   }
   cout<<state;
+  sleep(5);
 };
 
-void test_classe_mydevices(){
+
+
+// classe I2CActuatorScreen
+I2CActuatorScreen::I2CActuatorScreen ():Device(){
+  }
+
+void I2CActuatorScreen::run(){
+  while(1){
+    if ( (i2cbus!=NULL)&&!(i2cbus->isEmptyRegister(i2caddr))){
+      Device::i2cbus->requestFrom(i2caddr, buf, I2C_BUFFER_SIZE);
+      cout << "---screen :"<< buf << endl;
+    }
+    sleep(1);
+    }
+}
+
+/*void test_classe_mydevices(){
   Direction Bout_D(DELAY);
   Pressoir Bout_P(DELAY);
   Tilt Bout_T(DELAY);
@@ -88,7 +116,7 @@ void test_classe_mydevices(){
     Bout_D.run();
     Bout_P.run();
     Bout_T.run();
-  };
-};
+  };*/
+
 
 
