@@ -1,6 +1,5 @@
 
 #include "mydevices.h"
-
 using namespace std;
 
 
@@ -26,9 +25,10 @@ void Pressoir::run(){
 
       *ptrmem=state;
     }
+    sleep(temps);
   }
   cout<<state;
-  sleep(5);
+  
 };
 
 //classe DigitalActuatorLED
@@ -61,9 +61,10 @@ void Direction::run(){
       }
       *ptrmem=state;
     }
+    sleep(temps);
   }
   cout<<state;
-  sleep(5);
+  
 };
 
 
@@ -78,6 +79,8 @@ void Tilt::run(){
       if(ifstream("agiter.txt")){
         state=HIGH;
         cout<<"tilt agité"<<endl;
+        
+
       }
       else
       {
@@ -86,9 +89,10 @@ void Tilt::run(){
 
       *ptrmem=state;
     }
+    sleep(DELAY);
   }
   cout<<state;
-  sleep(5);
+  
 };
 
 

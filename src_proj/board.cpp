@@ -1,5 +1,6 @@
 #include "core_simulation.h"
 #include "mydevices.h"
+#include "internal.h"
 
 
 int main(){
@@ -13,6 +14,7 @@ int main(){
   Pressoir Bout_P(DELAY);
   Tilt Bout_T(DELAY);
   I2CActuatorScreen screen;
+  
   
   // branchement des capteurs actionneurs7
   esp8266.pin(0,Bout_D);

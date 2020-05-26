@@ -1,6 +1,10 @@
 #include <unistd.h>
 #include "core_simulation.h"
+#include "internal.h"
+#include <fstream>
 
+Dice De1;
+Dice De2;
 
 // la fonction d'initialisation d'arduino
 void Board::setup(){
@@ -10,15 +14,28 @@ void Board::setup(){
   pinMode(1,INPUT);
   pinMode(0,INPUT);
   pinMode(2,INPUT);
-
+ 
 }
 
 // la boucle de controle arduino
 void Board::loop(){
-
+//test bouton appuyé si fichiers txt créés
 digitalRead(0);
 digitalRead(1);
 digitalRead(2);
+
+
+//test lancé de dé si bouton tilt appuyé et renvoie la valeur des deux dés
+if(ifstream("agiter.txt")){
+De1.throw_dice();
+sleep(1);
+De2.throw_dice(); 
+cout<<"Le dé 1 fait "<<De1.read_val()<<endl;
+cout<<"le dé 2 fait "<<De2.read_val()<<endl;
+sleep(5);
+}
+
+
 };
 
  /* char buf[100];
