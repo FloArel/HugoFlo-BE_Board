@@ -1,9 +1,8 @@
 #include <unistd.h>
 #include "core_simulation.h"
-#include "internal.h"
-
 #include <fstream>
 #include "jeu.h"
+#include "internal.h"
 
 Dice De1;
 Dice De2;
@@ -13,7 +12,7 @@ vector<Player>::iterator chercher;
 
 bool partie_lancee=1;
 
-Player J0("Personne n'a ce role");
+Player J0("Personne");
 Roles Game1(J0);
 
 Player J1("Odran");
@@ -21,8 +20,8 @@ Player J2("Matis");
 Player J3("Florian");
 Player J4("Mael");
 Player J5("Hugo");
-
-
+enum Pouvoir {Dieu,Heros,Oracle,Ecuyer,Prisonnier,Catin,Aubergiste,Princesse,Dragon};
+static const char* strSignal[9]={"Dieu","Héros","Oracle","Ecuyer","Prisonnier","Catin","Aubergiste","Princesse","Dragon"};
 
 int stop=0;
 
@@ -30,7 +29,7 @@ int stop=0;
 void Board::setup(){
   // on configure la vitesse de la liaison
   Serial.begin(9600);
-  // on fixe les pin en entree et en sorite en fonction des capteurs/actionneurs mis sur la carte
+  // on fixe les pin en entree et en sporite en fonction des capteurs/actionneurs mis sur la carte
 
   //pin0 est le bouton de direction
   pinMode(0,INPUT);
@@ -62,7 +61,7 @@ void Board::loop(){
   else{
     digitalRead(2);
 
-
+    cout<<"C'est le tour de "<<courant->get_name()<<endl;
     //test lancé de dé si bouton tilt appuyé et renvoie la valeur des deux dés
     if(ifstream("agiter.txt")){
     De1.throw_dice();
@@ -70,24 +69,29 @@ void Board::loop(){
     De2.throw_dice(); 
     
     Afficher_valeur_role(De1.read_val(),De2.read_val(),*courant,&Game1);
-    for (chercher=Joueurs.begin(); chercher!=Joueurs.end(); chercher++)
+    if(Game1.getPlayer(PRISONNIER)->get_name()!=J0.get_name()){
+      for(int j=1;j<10;j++){
+        if(j!=5){
+        if(Game1.getPlayer(j)->get_name()==Game1.getPlayer(PRISONNIER)->get_name()){
+          Game1.setPlayerRole(J0,j);
+        }
+      }
+      }
+       cout<<"Le prisonnier perd tous ses rôles"<<endl;
+    }
+
+    /*for (chercher=Joueurs.begin(); chercher!=Joueurs.end(); chercher++)
     {
       cout<<chercher->get_name()<<endl;
-    }
+    }*/
 
     //cout<<Game1.getPlayer(CATIN)->get_name()<<endl;
     for (int role = 1; role < 10; role++)
     {
-      cout<<"le role "<<role<<" est attribue à "<<Game1.getPlayer(role)->get_name()<<endl;
-    }
-    
-    while (stop==0)
-    {
-      stop=digitalRead(1);
-      sleep(1);
+      cout<<"Le rôle "<<strSignal[Dieu+role-1]<<" est attribué à "<<Game1.getPlayer(role)->get_name()<<endl;
     }
 
-    if (courant==Joueurs.end())
+    if (courant==(Joueurs.end()-1))
     {
       courant=Joueurs.begin();
     }else{
@@ -98,7 +102,7 @@ void Board::loop(){
     
     }
   }
-  sleep(5);
+  sleep(4);
 };
 
  /* char buf[100];

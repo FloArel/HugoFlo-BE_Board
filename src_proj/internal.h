@@ -1,7 +1,9 @@
 #ifndef INTERNAL_H
 #define INTERNAL_H
 
+//Ce fichier internal comprend la définition des différentes classes non associés à des capteur
 
+//On attribue un int à chaque rôle pour les manipuler plus facilement
 #define DIEU 1
 #define HEROS 2
 #define ORACLE 3
@@ -21,12 +23,14 @@
 //#include "core_simulation.h"
 
 using namespace std;
-
+//Création de la classe Dice
 class Dice{
     private:
         int value;
     public:
+        //constructeur
         Dice();
+        //Destructeur
         virtual ~Dice(){};
         int read_val();
         void throw_dice();
@@ -37,9 +41,6 @@ class Dice{
 class Player{
     private:
         string name;
-        //Player* suiv;
-        //string Roles[15];
-
 
     public:
         Player();
@@ -48,7 +49,7 @@ class Player{
         void enter_name(string nom);
         string get_name();
         Player& operator+=(const string & nom);
-        //Player* get_suiv();
+        
         
 
 

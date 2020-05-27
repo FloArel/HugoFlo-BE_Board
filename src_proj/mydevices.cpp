@@ -2,12 +2,11 @@
 #include "mydevices.h"
 using namespace std;
 
-
+//Pour l'ensemble des fonctions runs, on simule le fait d'appuyer sur le bouton par la création d'un fichier .txt
+//Classe Bouton Pressoir
 
 Pressoir::Pressoir(int d): state(LOW),temps(d){
 }
-
-
 void Pressoir::run(){
  while (1)
   {
@@ -31,7 +30,8 @@ void Pressoir::run(){
   
 };
 
-//classe DigitalActuatorLED
+//classe Bouton Directionnel
+
 Direction::Direction(int t):state(),temps(t){
 };
 void Direction::run(){
@@ -67,20 +67,16 @@ void Direction::run(){
   
 };
 
+//Classe bouton Agitateur/Tilt
 
 Tilt::Tilt(int d):state(LOW),temps(d){}
-
 void Tilt::run(){
  while (1)
   {
     if(ptrmem!=NULL){
-      
-
       if(ifstream("agiter.txt")){
         state=HIGH;
         cout<<"tilt agité"<<endl;
-        
-
       }
       else
       {
@@ -92,7 +88,6 @@ void Tilt::run(){
     sleep(DELAY);
   }
   cout<<state;
-  
 };
 
 

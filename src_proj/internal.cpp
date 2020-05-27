@@ -22,7 +22,6 @@ static Player* J_courant=NULL;*/
 //constructeur dice
 Dice::Dice(){
     value=1;
-    cout<<"dé créé"<<endl;
 }
 
 

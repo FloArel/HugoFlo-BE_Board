@@ -7,8 +7,8 @@
 #include <string.h>
 #include "core_simulation.h"
 #include <fstream>
-//#include "internal.h"
 
+//les defines ci-dessous correspondent aux directions des boutons directionnels
 #define NOTHING 0
 #define UP 1
 #define DOWN 2
@@ -16,18 +16,14 @@
 #define RIGHT 4
 
 
-// exemple de capteur analogique de temperature, ne pas oublier d'heriter de Device
+//classe Button qui hérite de Device
 class Button: public Device {
 private:
-  // fait osciller la valeur du cpateur de 1
-  int alea;
-  // valeur de temperature mesuree
-  int val;
   // temps entre 2 prises de valeurs
   int temps;
   
 public:
-  // thread representant le capteur et permettant de fonctionner independamment de la board
+  //thread representant le capteur et permettant de fonctionner independamment de la board
     virtual void run()=0;
     //constructeur
   Button(){};
@@ -38,7 +34,7 @@ public:
 
 // Création des trois classes de boutons différentes qui héritent de Button
 
-//classe bouton
+//classe bouton Pressoir
 class Pressoir: public Button{
   private:
     int state;
@@ -49,7 +45,7 @@ class Pressoir: public Button{
 
     void run();
 };
-
+//Classe bouton agitateur (utilisé pour lancer les dés)
 class Tilt: public Button{
   private:
     int state;
@@ -59,7 +55,7 @@ class Tilt: public Button{
   Tilt(int d);
   void run();
 };
-
+//Classe bouton directionnel
 class Direction: public Button{
   private:
     int state;
@@ -72,11 +68,8 @@ class Direction: public Button{
 
 
 class LCD{
-  //on voit si on peut utiliser la classe LCD qui existe
+  //à utiliser si il y a le temps
 };
-
-
-
 
 
 // exemple d'actionneur sur le bus I2C permettant d'echanger des tableaux de caracteres : un ecran, ne pas oublier d'heriter de Device
