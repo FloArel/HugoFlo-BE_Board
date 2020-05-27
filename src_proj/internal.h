@@ -23,7 +23,7 @@
 //#include "core_simulation.h"
 
 using namespace std;
-//Création de la classe Dice
+//Création de la classe Dice avec fonctions pour lancer un dé et lire sa valeur
 class Dice{
     private:
         int value;
@@ -36,7 +36,7 @@ class Dice{
         void throw_dice();
 };
 
-
+//Création de la classe Player qui permet d'instancier un joueur et de lui donner un nom
 
 class Player{
     private:
@@ -55,7 +55,9 @@ class Player{
 
 
 };
-
+//Création de la classe Roles 
+//Meme si c'était moins intuitif, il était plus simple que les joueurs soient contenus dans le tableau des rôles
+//En effet, dans ce jeu, un rôle ne peut être attribué que à un seul joueur en même temps
 class Roles{
     private:
         //TODO attribut tableau de player pour none et prisonnier?
@@ -71,11 +73,11 @@ class Roles{
         Player* Dragon;
         
     public:
-        
+        //Constructeur qui donne tous les rôles à un joueur "Personne" par défaut : cela permet de dire que personne n'a ce rôle
         Roles(Player& J0);
-
+        //Fonction qui permet de dire quel joueur à le role donné en argument
         Player* getPlayer(int role);
-
+        //Fonction permettant de donner à un rôle le nom d'un joueur
         void setPlayerRole(Player& attrib, int role);
         
 

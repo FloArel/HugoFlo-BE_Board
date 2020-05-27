@@ -9,15 +9,8 @@ using namespace std;
 #define TESTPLAY 1
 #define TESTLISTE 1
 
-//var globale pour savoir quels roles sont attribues avec masques
-//static int roles_attrib=0;
-//var globale total joueurs pour faire la liste
-static int nb_joueurs=0;
+//Ce fichier internal comprend les différentes classes non associées à des capteur
 
-//pointeurs joueurs pour parcours de la liste chainee
-/*static Player* dernier=NULL;
-static Player* premier=NULL;
-static Player* J_courant=NULL;*/
 
 //constructeur dice
 Dice::Dice(){
@@ -25,11 +18,11 @@ Dice::Dice(){
 }
 
 
-
+//Fonction poue lire la valeur du dé
 int Dice::read_val(){
     return value;
 }
-
+//Fonction pour lancer le dé
 void Dice::throw_dice(){
     
     // donner une seed differente selon l'horloge interne
@@ -43,31 +36,30 @@ void Dice::throw_dice(){
 //constructeur player
 Player::Player(){
     name="joueur sans nom";
-    //nb_joueurs++;
+    
     
     
 }
+//Surcharge de constructeur
 Player::Player(string nom){
     name=nom;
-    //nb_joueurs++;
 }
 
 //destructeur player
 Player::~Player(){
-
 }
-
+//Fonction pour attribuer un nom à un joueur
 void Player::enter_name(string nom){
     name=nom;
     cout<<"nouveau nom: "<<name<<endl;
 }
-
+//Fonction pour obtenir le nom d'un joueur
 string Player::get_name(){
     return name;
 }
 
 //constructeur roles
-//constructeur: Tous les rôles sont attribués à un faux joueur
+//constructeur: Tous les rôles sont attribués à un faux joueur J0
 Roles::Roles(Player& J0){
     
     None=&J0;
@@ -82,7 +74,7 @@ Roles::Roles(Player& J0){
     Dragon=&J0;
 
 }
-
+ //Fonction qui permet de dire quel joueur à le role donné en argument
 Player* Roles::getPlayer(int role){
     switch (role)
         {
@@ -119,7 +111,7 @@ Player* Roles::getPlayer(int role){
             break;
         }
 }
-
+//Fonction permettant de donner à un rôle le nom d'un joueur
 void Roles::setPlayerRole(Player& attrib, int role){
     switch (role){
         case DIEU:

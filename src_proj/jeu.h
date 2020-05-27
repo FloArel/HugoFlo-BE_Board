@@ -2,11 +2,11 @@
 #define JEU_H
 
 #include <iostream>
-#include <thread>
+//#include <thread>
 #include <unistd.h>
 #include <string.h>
 #include "core_simulation.h"
-#include <fstream>
+//#include <fstream>
 #include "internal.h"
 using namespace std;
 
