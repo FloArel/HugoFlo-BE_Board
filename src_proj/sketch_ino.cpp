@@ -10,7 +10,7 @@ vector<Player> Joueurs;
 vector<Player>::iterator courant;
 vector<Player>::iterator chercher;
 
-bool partie_lancee=1;
+int partie_lancee=1;
 
 Player J0("Personne");
 Roles Game1(J0);
@@ -51,19 +51,74 @@ void Board::setup(){
 void Board::loop(){
   
   if (partie_lancee!=1){
-    //test bouton appuyé si fichiers txt créés
-    digitalRead(0);
-    digitalRead(1);
     
+    char buf[100];
+    int nb=1;
+    sprintf(buf,"Entrez le nombre de joueurs grace aux boutons:");
+    bus.write(1,buf,100);
+    int dir=0;
+    while (partie_lancee!=1)
+    {
+      sprintf(buf,"%d Joueurs",nb);
+      bus.write(1,buf,100);
 
+      //test bouton appuyé si fichiers txt créés
+      
+      //on lit la valeur du bouton directionnel 
+      dir=digitalRead(0);
+      switch (dir)
+      {
+      case 1:
+        //augmenter nb de joueurs si up ou right
+        if (nb<20){
+          nb++;
+          sleep(2);}
+        break;
+      case 2:
+        //diminuer si down ou left
+        if (nb>1){
+          nb--;
+          sleep(2);}
+        break;
+
+      case 3:
+        //left
+        if (nb>1){
+          nb--;
+          sleep(2);}
+        break;
+      case 4:
+        //right
+        if (nb<20){
+          nb++;
+          sleep(2);}
+        break;
+      default:
+        break;
+      }
+      dir=0;
+
+      partie_lancee=digitalRead(1);
+      if (partie_lancee)
+      {
+        sprintf(buf,"Partie lancee avec %d joueurs!",nb);
+        bus.write(1,buf,100);
+        
+        
+      }
+      
+    
+    }
 
   }
   else{
-    digitalRead(2);
-
+    int tilt=digitalRead(2);
+    sleep(1);
+    tilt=digitalRead(2);
+    
     cout<<"C'est le tour de "<<courant->get_name()<<endl;
     //test lancé de dé si bouton tilt appuyé et renvoie la valeur des deux dés
-    if(ifstream("agiter.txt")){
+    if(tilt){
     De1.throw_dice();
     sleep(1);
     De2.throw_dice(); 
@@ -80,12 +135,7 @@ void Board::loop(){
        cout<<"Le prisonnier perd tous ses rôles"<<endl;
     }
 
-    /*for (chercher=Joueurs.begin(); chercher!=Joueurs.end(); chercher++)
-    {
-      cout<<chercher->get_name()<<endl;
-    }*/
-
-    //cout<<Game1.getPlayer(CATIN)->get_name()<<endl;
+  
     for (int role = 1; role < 10; role++)
     {
       cout<<"Le rôle "<<strSignal[Dieu+role-1]<<" est attribué à "<<Game1.getPlayer(role)->get_name()<<endl;
@@ -102,49 +152,9 @@ void Board::loop(){
     
     }
   }
-  sleep(4);
+  sleep(2);
 };
 
- /* char buf[100];
-  char buf2[100];
-  int val;
-  int valum;
-  static int cpt=0;
-  static int bascule=0;
-  int i=0;
-  
-  for(i=0;i<10;i++){
-    // lecture sur la pin 1 : capteur de temperature
-    val=analogRead(1);
-    valum=analogRead(2);
-    sprintf(buf,"temperature %d",val);
-    Serial.println(buf);
-    sprintf(buf2,"luminosite %d",valum);
-    Serial.println(buf2);
-
-    if(cpt%5==0){
-        // tous les 5 fois on affiche sur l ecran la temperature
-      sprintf(buf,"%d",val);
-      bus.write(1,buf,100);
-    }
-    cpt++;
-    sleep(1);
-  }
-  bascule=digitalRead(4);
-  cout<<"etat bouton: "<<bascule<<endl;
-// on eteint et on allume la LED
-  if(bascule){
-    digitalWrite(0,HIGH);
-    digitalWrite(3,HIGH);
-    cout<<"bascule vers on \n";
-  }
-  else{
-    digitalWrite(0,LOW);
-    digitalWrite(3,LOW);
-    cout<<"bascule vers off \n";
-  }
-  //bascule=1-bascule;
-  */
 
 
 
