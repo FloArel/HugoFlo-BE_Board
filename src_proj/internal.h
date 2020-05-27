@@ -9,7 +9,7 @@
 #define ORACLE 3
 #define ECUYER 4
 #define PRISONNIER 5
-#define CATIN 6
+#define SEDUCTRICE 6
 #define AUBERGISTE 7
 #define PRINCESSE 8
 #define DRAGON 9
@@ -67,7 +67,7 @@ class Roles{
         Player* Oracle;
         Player* Ecuyer;
         Player* Prisonnier;
-        Player* Catin;
+        Player* Seductrice;
         Player* Aubergiste;
         Player* Princesse;
         Player* Dragon;

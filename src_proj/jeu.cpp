@@ -21,8 +21,8 @@ if ((a==1 && b==1) || (a==2 && b==2)|| (a==3 && b==3)){
                 Game->setPlayerRole(J_courant,ECUYER);
             } else {
                 if((a==1 && b==4) || (a==4 && b==1)){
-                    cout<<"Chaud devant la catin est là"<<endl;
-                    Game->setPlayerRole(J_courant,CATIN);
+                    cout<<"Chaud devant la seductrice est là"<<endl;
+                    Game->setPlayerRole(J_courant,SEDUCTRICE);
                 } else {
                     if((a==1 && b==5) || (a==5 && b==1)||(a==2 && b==4) || (a==4 && b==2)){
                         cout<<"Tout le monde boit !"<<endl;
@@ -41,14 +41,14 @@ if ((a==1 && b==1) || (a==2 && b==2)|| (a==3 && b==3)){
                                 if(a+b==7){
                                     cout<<"Tous aux abris, le Dieu attaque et donne "<<a<<" gorgées à une victime"<<endl;
                                     //Ci-dessous, la catin tente de s'interposer en lançant le dé déHeros instancié en début de fct
-                                        if(Game->getPlayer(CATIN)->get_name()!="Personne"){
-                                            cout<<"La Catin s'interpose"<<endl;
+                                        if(Game->getPlayer(SEDUCTRICE)->get_name()!="Personne"){
+                                            cout<<"La Seductrice s'interpose"<<endl;
                                             DeHeros.throw_dice();
                                             c=DeHeros.read_val();
                                             cout<<"le résultat est "<<c<<endl;
                                             if(c==1){
-                                                cout<<"La Catin est la meilleure, le Dieu boit "<<a<<" gorgées"<<endl;
-                                            }else{ cout<<"La Catin est la pire, elle boit "<<a<<" gorgées"<<endl;}
+                                                cout<<"La Seductrice est la meilleure, le Dieu boit "<<a<<" gorgées"<<endl;
+                                            }else{ cout<<"La Seductrice est la pire, elle boit "<<a<<" gorgées"<<endl;}
 
 
                                         }else{

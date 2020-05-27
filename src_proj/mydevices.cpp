@@ -85,7 +85,7 @@ void Tilt::run(){
 
       *ptrmem=state;
     }
-    sleep(DELAY);
+    sleep(temps);
   }
   cout<<state;
 };

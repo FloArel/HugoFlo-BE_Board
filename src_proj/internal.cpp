@@ -68,7 +68,7 @@ Roles::Roles(Player& J0){
     Oracle=&J0;
     Ecuyer=&J0;
     Prisonnier=&J0;
-    Catin=&J0;
+    Seductrice=&J0;
     Aubergiste=&J0;
     Princesse=&J0;
     Dragon=&J0;
@@ -93,8 +93,8 @@ Player* Roles::getPlayer(int role){
         case PRISONNIER:
             return Prisonnier;
             break;
-        case CATIN:
-            return Catin;
+        case SEDUCTRICE:
+            return Seductrice;
             break;
         case AUBERGISTE:
             return Aubergiste;
@@ -129,8 +129,8 @@ void Roles::setPlayerRole(Player& attrib, int role){
         case PRISONNIER:
             Prisonnier=&attrib;
             break;
-        case CATIN:
-            Catin=&attrib;
+        case SEDUCTRICE:
+            Seductrice=&attrib;
             break;
         case AUBERGISTE:
             Aubergiste=&attrib;

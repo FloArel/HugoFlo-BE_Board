@@ -12,37 +12,37 @@
         'z') 
             touch up.txt
             echo "pressing up..."
-            sleep 3
+            sleep 2
             rm up.txt
             ;;
         'q')
             touch left.txt
             echo "pressing left..."
-            sleep 3
+            sleep 2
             rm left.txt
             ;;
         's')
             touch down.txt
             echo "pressing down..."
-            sleep 3
+            sleep 2
             rm down.txt
             ;;
         'd')
             touch right.txt
             echo "pressing right..."
-            sleep 3
+            sleep 2
             rm right.txt
             ;;
         'p')
             touch on.txt
             echo "pushing..."
-            sleep 3
+            sleep 2
             rm on.txt
             ;;
         'a')
             touch agiter.txt
             echo "shaking..."
-            sleep 3
+            sleep 2
             rm agiter.txt
             ;;
     esac

@@ -20,8 +20,8 @@ Player J2("Matis");
 Player J3("Florian");
 Player J4("Mael");
 Player J5("Hugo");
-enum Pouvoir {Dieu,Heros,Oracle,Ecuyer,Prisonnier,Catin,Aubergiste,Princesse,Dragon};
-static const char* strSignal[9]={"Dieu","Héros","Oracle","Ecuyer","Prisonnier","Catin","Aubergiste","Princesse","Dragon"};
+enum Pouvoir {Dieu,Heros,Oracle,Ecuyer,Prisonnier,Seductrice,Aubergiste,Princesse,Dragon};
+static const char* strSignal[9]={"Dieu","Héros","Oracle","Ecuyer","Prisonnier","Seductrice","Aubergiste","Princesse","Dragon"};
 
 int stop=0;
 
@@ -132,7 +132,7 @@ void Board::loop(){
         }
       }
       }
-       cout<<"Le prisonnier perd tous ses rôles"<<endl;
+       cout<<"Le prisonnier n'a plus de rôles!"<<endl;
     }
 
   
