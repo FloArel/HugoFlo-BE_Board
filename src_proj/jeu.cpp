@@ -39,7 +39,7 @@ if ((a==1 && b==1) || (a==2 && b==2)|| (a==3 && b==3)){
                                 //Lorsque que les dés font 7, le dieu attaque. Si les rôles de Catin et Héros sont déjà attribués, ces derniers s'interposent et lancent un dé
 
 
-                                if(a+b==7){
+                                if(a+b==7 && Game->getPlayer(DIEU)->get_name()!="Personne" ){
                                     cout<<"Tous aux abris, le Dieu attaque et donne "<<a<<" gorgées à une victime"<<endl;
                                     //Ci-dessous, la catin tente de s'interposer en lançant le dé déHeros instancié en début de fct
                                         if(Game->getPlayer(SEDUCTRICE)->get_name()!="Personne"){
@@ -58,8 +58,8 @@ if ((a==1 && b==1) || (a==2 && b==2)|| (a==3 && b==3)){
                                         if(Game->getPlayer(HEROS)->get_name()!="Personne" && c!=1){
                                             cout<<"Héros lancez le dé"<<endl;
                                             DeHeros.throw_dice();
-                                            //h=DeHeros.read_val();
-                                            h=1;
+                                            h=DeHeros.read_val();
+                                            //h=1;
                                             cout<<"le résultat est "<<h<<endl;
                                             switch(h){
                                                 case 1 : 
@@ -79,7 +79,7 @@ if ((a==1 && b==1) || (a==2 && b==2)|| (a==3 && b==3)){
                                                     break;
 
                                             }    
-                                            //Si le héros et la catin ne sont pas attribués, la victime boit directement 
+                                            //Si le héros et la seductrice ne sont pas attribués, la victime boit directement 
                                         }else {
                                             if(c!=1){
                                             cout<<"La victime boit "<<a<<" gorgées"<<endl;}}
@@ -110,7 +110,12 @@ if ((a==1 && b==1) || (a==2 && b==2)|| (a==3 && b==3)){
                                                             if((a==4 && b==6) || (a==6 && b==4)){
                                                                     cout<<"Donne 4!"<<endl;
                                                             }else{
-                                                                cout<<"Il ne se passe rien"<<endl;
+                                                                if((a==1 && b==2) || (a==2 && b==1)){
+                                                                    cout<<"Un nouvel oracle a une illumination!"<<endl;
+                                                                    Game->setPlayerRole(J_courant,ORACLE);
+                                                                }else{
+                                                                    cout<<"Il ne se passe rien"<<endl;
+                                                                }
                                                             }
                                                         }
                                                     }

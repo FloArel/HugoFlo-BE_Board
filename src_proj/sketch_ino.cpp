@@ -10,6 +10,7 @@ vector<Player> Joueurs;
 vector<Player>::iterator courant;
 vector<Player>::iterator chercher;
 
+//On démarre sans l'instanciation dynamique, qui ne marche pas pour l'instant
 int partie_lancee=1;
 //Déclaration du joueur par défaut 
 Player J0("Personne");
@@ -102,10 +103,21 @@ void Board::loop(){
       partie_lancee=digitalRead(1);
       if (partie_lancee)
       {
+        //la partie commentée suivante devait servir à implémenter la liste des joueurs
+        /*
+        for (int i = 0; i < nb; i++)
+        {
+          //instanciation dynamique des joueurs et chaînage dans la liste
+          Player J("Joueur %d",nb);
+          Joueurs.push_back(J);
+
+        }
+        
         sprintf(buf,"Partie lancee avec %d joueurs!",nb);
         bus.write(1,buf,100);
+        courant=Joueurs.begin();
         
-        
+        */
       }
       
     
@@ -116,9 +128,7 @@ void Board::loop(){
     int tilt=digitalRead(2);
     sleep(1);
     tilt=digitalRead(2);
-    Game1.setPlayerRole(J1,SEDUCTRICE);
-    Game1.setPlayerRole(J2,DIEU);
-    Game1.setPlayerRole(J3,HEROS);
+    
 
     cout<<"C'est le tour de "<<courant->get_name()<<endl;
     //test lancé de dé si bouton tilt appuyé et renvoie la valeur des deux dés
@@ -127,8 +137,8 @@ void Board::loop(){
     sleep(1); //sert à donner 2 valeurs de dés différents car la rand est calé sur l'horloge interne de la machine
     De2.throw_dice(); 
     
-    //Afficher_valeur_role(De1.read_val(),De2.read_val(),*courant,&Game1,J0);
-    Afficher_valeur_role(4,3,*courant,&Game1,J0);
+    Afficher_valeur_role(De1.read_val(),De2.read_val(),*courant,&Game1,J0);
+    
 
     //Si un joueur est prisonnier, il doit perdre ses rôles
     if(Game1.getPlayer(PRISONNIER)->get_name()!=J0.get_name()){
