@@ -9,7 +9,7 @@ Les fichiers internal contiennent les définitions des classes internes telles q
 Le fichier Jeu.cpp contient la fonction principale d'évaluation des actions et attributions de rôles selon le montant des dés.
 
 Précisions sur la boucle loop du fichier sketch_ino.cpp:  
-Elle est "séparée" en deux parties, le paramétrage de la partie, puis le déroulement de la partie. Le paramétrage n'a lieu que la première fois que la boucle est exécutée et sert à ajouter le bon nombre de joueurs et leur noms. C'est ici que servent le bouton directionnel et le poussoir.
+Elle est "séparée" en deux parties, le paramétrage de la partie, puis le déroulement de la partie. Le paramétrage n'a lieu que la première fois que la boucle est exécutée et sert à ajouter le bon nombre de joueurs et leur noms. C'est ici que servent le bouton directionnel et le poussoir. Durant le déroulement de la partie il suffit d'appuyer sur la touche "a" grâce au script pour agiter les dés.
 
 ## Règles du Jeu
 Dans ce jeu, des rôles vous seront affectés en fonction de vos lancés de dés.  
