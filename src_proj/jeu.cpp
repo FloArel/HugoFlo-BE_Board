@@ -2,10 +2,11 @@
 
 using namespace std;
 //Fonction qui va récupérer en argument la valeur des deux dés, le joueur qui les a lancé et un pointeur vers le "tableau" des rôles
-void Afficher_valeur_role (int de1, int de2, Player& J_courant, Roles* Game){
+void Afficher_valeur_role (int de1, int de2, Player& J_courant, Roles* Game,Player& defaut){
 int a=de1; //attribue la valeur des dés dans des variables internes, pour évtier d'écrire De.get_val() à chaque fois
 int b=de2;
-int c;
+int c=0; //int qui enregistre la valeur du dé de la séductrice, mise à 0 pour éviter problème de boucle
+int h; //int qui enregistre la valeur du dé du héros
 Dice DeHeros; //Création d'un objet dé interne car quand les dés font 7, le héros et la catin s'interposent face au Dieu
 cout<<"Le dé 1 fait "<<a<<endl; 
 cout<<"le dé 2 fait "<<b<<endl;
@@ -51,17 +52,19 @@ if ((a==1 && b==1) || (a==2 && b==2)|| (a==3 && b==3)){
                                             }else{ cout<<"La Seductrice est la pire, elle boit "<<a<<" gorgées"<<endl;}
 
 
-                                        }else{
+                                        }
                                         //Si la catin n'existe pas ou rate, le héros s'interpose en lançant le même dé
                                         //Le case sert à dire ce qu'il se passe en fonction du résultat du dé du héros                                  
-                                        if(Game->getPlayer(HEROS)->get_name()!="Personne"){
+                                        if(Game->getPlayer(HEROS)->get_name()!="Personne" && c!=1){
                                             cout<<"Héros lancez le dé"<<endl;
                                             DeHeros.throw_dice();
-                                            c=DeHeros.read_val();
-                                            cout<<"le résultat est "<<c<<endl;
-                                            switch(c){
+                                            //h=DeHeros.read_val();
+                                            h=1;
+                                            cout<<"le résultat est "<<h<<endl;
+                                            switch(h){
                                                 case 1 : 
-                                                    cout<<"le héros boit cul sec"<<endl; 
+                                                    cout<<"le héros boit cul sec. Il est désintégré et n'est plus héros"<<endl;
+                                                    Game->setPlayerRole(defaut,HEROS);
                                                     break;
                                                 case 2 :
                                                 case 3 : 
@@ -77,8 +80,11 @@ if ((a==1 && b==1) || (a==2 && b==2)|| (a==3 && b==3)){
 
                                             }    
                                             //Si le héros et la catin ne sont pas attribués, la victime boit directement 
-                                        }else {cout<<"La victime boit "<<a<<" gorgées"<<endl;}}
-                                } else{
+                                        }else {
+                                            if(c!=1){
+                                            cout<<"La victime boit "<<a<<" gorgées"<<endl;}}
+                                        c=0; //remise du dé de la séductrice à 0 pour éviter des problèmes de boucle quand le héros défend
+                                }else{
                                     if ((a==4 && b==4) || (a==5 && b==5)|| (a==6 && b==6)){
                                             cout<<"Gare à vous le Dieu est arrivé"<<endl;
                                             Game->setPlayerRole(J_courant,DIEU);

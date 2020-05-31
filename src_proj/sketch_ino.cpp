@@ -11,15 +11,17 @@ vector<Player>::iterator courant;
 vector<Player>::iterator chercher;
 
 int partie_lancee=1;
-
+//Déclaration du joueur par défaut 
 Player J0("Personne");
 Roles Game1(J0);
-
+//Déclaration des joueurs 
 Player J1("Odran");
 Player J2("Matis");
 Player J3("Florian");
 Player J4("Mael");
 Player J5("Hugo");
+
+//Enumération pour afficher les rôles en toutes lettres sur le terminal
 enum Pouvoir {Dieu,Heros,Oracle,Ecuyer,Prisonnier,Seductrice,Aubergiste,Princesse,Dragon};
 static const char* strSignal[9]={"Dieu","Héros","Oracle","Ecuyer","Prisonnier","Seductrice","Aubergiste","Princesse","Dragon"};
 
@@ -29,7 +31,6 @@ int stop=0;
 void Board::setup(){
   // on configure la vitesse de la liaison
   Serial.begin(9600);
-  // on fixe les pin en entree et en sporite en fonction des capteurs/actionneurs mis sur la carte
 
   //pin0 est le bouton de direction
   pinMode(0,INPUT);
@@ -37,7 +38,7 @@ void Board::setup(){
   pinMode(1,INPUT);
   //pin2 est le bouton tilt
   pinMode(2,INPUT);
-
+//Ajout des joueurs dans la liste chainée
   Joueurs.push_back(J1);
   Joueurs.push_back(J2);
   Joueurs.push_back(J3);
@@ -115,15 +116,21 @@ void Board::loop(){
     int tilt=digitalRead(2);
     sleep(1);
     tilt=digitalRead(2);
-    
+    Game1.setPlayerRole(J1,SEDUCTRICE);
+    Game1.setPlayerRole(J2,DIEU);
+    Game1.setPlayerRole(J3,HEROS);
+
     cout<<"C'est le tour de "<<courant->get_name()<<endl;
     //test lancé de dé si bouton tilt appuyé et renvoie la valeur des deux dés
     if(tilt){
     De1.throw_dice();
-    sleep(1);
+    sleep(1); //sert à donner 2 valeurs de dés différents car la rand est calé sur l'horloge interne de la machine
     De2.throw_dice(); 
     
-    Afficher_valeur_role(De1.read_val(),De2.read_val(),*courant,&Game1);
+    //Afficher_valeur_role(De1.read_val(),De2.read_val(),*courant,&Game1,J0);
+    Afficher_valeur_role(4,3,*courant,&Game1,J0);
+
+    //Si un joueur est prisonnier, il doit perdre ses rôles
     if(Game1.getPlayer(PRISONNIER)->get_name()!=J0.get_name()){
       for(int j=1;j<10;j++){
         if(j!=5){
@@ -135,12 +142,12 @@ void Board::loop(){
        cout<<"Le prisonnier n'a plus de rôles!"<<endl;
     }
 
-  
+  //Permet de faire un rappel des rôles de chaque joueur à la fin de chaque tour de joueur
     for (int role = 1; role < 10; role++)
     {
       cout<<"Le rôle "<<strSignal[Dieu+role-1]<<" est attribué à "<<Game1.getPlayer(role)->get_name()<<endl;
     }
-
+  //Permet de passer au joueur suivant
     if (courant==(Joueurs.end()-1))
     {
       courant=Joueurs.begin();
